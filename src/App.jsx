@@ -3,6 +3,7 @@ import './App.css'
 import Navbar from './components/Navbar'
 import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineDelete } from "react-icons/md";
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [todo, setTodo] = useState('')
@@ -13,9 +14,28 @@ function App() {
   }
 
   const handleAdd = () =>{
-    setTodos([...todos, {todo, isCompleted : false}])
+    setTodos([...todos, {id: uuidv4(), todo, isCompleted : false}])
     setTodo('')
   }
+
+  const handleEdit = () =>{
+    
+  }
+
+  const handleDelete = () =>{
+    
+  }
+
+  const handleCheckbox = (e) => {
+    let id = e.target.name
+    let index = todos.findIndex(item =>{
+      return item.id === id;
+    })
+    let newTodos = [...todos]
+    newTodos[index].isCompleted = !newTodos[index].isCompleted;
+    setTodos(newTodos)
+  }
+  
 
 
 
@@ -44,12 +64,12 @@ function App() {
         {/* Todos Conotainer */}
         <div className="todos">
           {todos.map(item =>{
-          return <div className="todo flex align-middle gap-3 my-3">
-          <input type="checkbox" value={item.isCompleted}/>
+          return <div key = {item.id} className="todo flex align-middle gap-3 my-3">
+          <input onChange={handleCheckbox} name = {item.id} type="checkbox" value={item.isCompleted}/>
           <p className={`text-black w-[30%] ${item.isCompleted ? 'line-through' : ''}`}>{item.todo}</p>
             <div className='flex gap-2 align-middle'>
-            <button className="edit bg-emerald-600 rounded-md px-3 py-1"><FaRegEdit className='text-white'/></button>
-            <button className="delete bg-emerald-600 rounded-md px-3 py-1"><MdOutlineDelete className='text-white'/></button>
+            <button onClick={handleEdit} className="edit bg-emerald-600 rounded-md px-3 py-1"><FaRegEdit className='text-white'/></button>
+            <button onClick={handleDelete} className="delete bg-emerald-600 rounded-md px-3 py-1"><MdOutlineDelete className='text-white'/></button>
             </div>
           </div>
           })}
