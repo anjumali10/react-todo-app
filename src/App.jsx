@@ -22,8 +22,11 @@ function App() {
     
   }
 
-  const handleDelete = () =>{
-    
+  const handleDelete = (e, id) =>{
+    let newTodos = todos.filter(item => {
+      return item.id !== id;
+    })
+    setTodos(newTodos)
   }
 
   const handleCheckbox = (e) => {
@@ -63,13 +66,14 @@ function App() {
 
         {/* Todos Conotainer */}
         <div className="todos">
+          {todos.length == 0 && <div>No todos to display</div>}
           {todos.map(item =>{
           return <div key = {item.id} className="todo flex align-middle gap-3 my-3">
           <input onChange={handleCheckbox} name = {item.id} type="checkbox" value={item.isCompleted}/>
           <p className={`text-black w-[30%] ${item.isCompleted ? 'line-through' : ''}`}>{item.todo}</p>
             <div className='flex gap-2 align-middle'>
             <button onClick={handleEdit} className="edit bg-emerald-600 rounded-md px-3 py-1"><FaRegEdit className='text-white'/></button>
-            <button onClick={handleDelete} className="delete bg-emerald-600 rounded-md px-3 py-1"><MdOutlineDelete className='text-white'/></button>
+            <button onClick={(e) => {handleDelete(e, item.id)}} className="delete bg-emerald-600 rounded-md px-3 py-1"><MdOutlineDelete className='text-white'/></button>
             </div>
           </div>
           })}
