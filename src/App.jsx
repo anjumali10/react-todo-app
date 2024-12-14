@@ -18,8 +18,15 @@ function App() {
     setTodo('')
   }
 
-  const handleEdit = () =>{
-    
+  const handleEdit = (e, id) =>{
+    let t = todos.filter(item => {
+      return item.id === id
+    })
+    setTodo(t[0].todo)
+    let newTodos = todos.filter(item => {
+      return item.id !== id;
+    })
+    setTodos(newTodos)
   }
 
   const handleDelete = (e, id) =>{
@@ -72,7 +79,7 @@ function App() {
           <input onChange={handleCheckbox} name = {item.id} type="checkbox" value={item.isCompleted}/>
           <p className={`text-black w-[30%] ${item.isCompleted ? 'line-through' : ''}`}>{item.todo}</p>
             <div className='flex gap-2 align-middle'>
-            <button onClick={handleEdit} className="edit bg-emerald-600 rounded-md px-3 py-1"><FaRegEdit className='text-white'/></button>
+            <button onClick={(e) => {handleEdit(e, item.id)}} className="edit bg-emerald-600 rounded-md px-3 py-1"><FaRegEdit className='text-white'/></button>
             <button onClick={(e) => {handleDelete(e, item.id)}} className="delete bg-emerald-600 rounded-md px-3 py-1"><MdOutlineDelete className='text-white'/></button>
             </div>
           </div>
