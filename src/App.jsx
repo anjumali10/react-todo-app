@@ -78,7 +78,7 @@ function App() {
     {/* Add Navbar */}
       <Navbar/>
 
-      <div className="main md:container md:mx-auto w-[50vw] m-auto bg-emerald-300 my-10 min-h-[80vh] rounded-lg p-5 md:w-[35%]">
+      <div className="main mx-auto w-[90vw] sm:w-[50%] lg:w-[40%] m-auto bg-emerald-300 my-6 sm:my-10 min-h-[80vh] rounded-lg p-4 sm:p-5">
         <h2 className='text-center font-extrabold text-lg'>AJ-Task Manage Your Todos at One Place</h2>
         <h2 className='text-black font-bold'>Add ToDo</h2>
         <div className="input flex gap-5 my-3">
